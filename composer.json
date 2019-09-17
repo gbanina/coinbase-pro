@@ -1,0 +1,21 @@
+{
+    "name": "gbanina/coinbase-pro",
+    "description": "Client library for the Coinbase Pro. Intuitive and stable interface to integrate Coinbase MArket into your Laravel project.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Goran Banina",
+            "email": "gbanina@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    },
+        "autoload": {
+        "psr-4": {
+            "Gbanina\\CoinbasePro\\": "src/"
+        }
+    },
+}
