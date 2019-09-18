@@ -1,4 +1,5 @@
 <?php
+
 namespace Gbanina\CoinbasePro;
 
 use Illuminate\Support\ServiceProvider;
@@ -13,5 +14,6 @@ class CoinbaseProServiceProvider extends ServiceProvider {
         }
         public function register()
         {
+          //
         }
 }

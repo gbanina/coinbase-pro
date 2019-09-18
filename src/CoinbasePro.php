@@ -5,10 +5,11 @@ namespace Gbanina\CoinbasePro;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
-use Gbanina\CoinbasePro\CoinbaseProMarket;
 
-class CoinbasePro extends CoinbaseProMarket
+class CoinbasePro
 {
+    use CoinbaseProOrder;
+    use CoinbaseProAccount;
     /**
      * @const string
      */
@@ -77,15 +78,19 @@ class CoinbasePro extends CoinbaseProMarket
         }
     }
 
-    public function getAccounts(array $query = [])
+    public function getProducts(array $query = [])
     {
-        return $this->makeRequest('GET', '/accounts', $query);
+        return $this->makeRequest('GET', '/products', $query);
     }
 
-    public function getOrders(array $query = [])
+    public function getCurrencies(array $query = [])
     {
-        return $this->makeRequest('GET', '/orders', $query);
+        return $this->makeRequest('GET', '/currencies', $query);
     }
 
+    public function getTime(array $query = [])
+    {
+        return $this->makeRequest('GET', '/time', $query);
+    }
 
 }
