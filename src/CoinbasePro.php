@@ -57,6 +57,15 @@ class CoinbasePro
 
     public function makeRequest(string $method, string $uri, array $query = [])
     {
+        $params = "";
+        if(!empty($query)){
+            $params = "?";
+            foreach($query as $key=>$val)
+                $params .= $key . '=' . $val . '&';
+        }
+
+        $uri .= $params;
+
         $time = time();
         $what = $time.$method.$uri.'';
         $sign = base64_encode(hash_hmac("sha256", $what, base64_decode($this->apiSecret), true));
@@ -70,7 +79,7 @@ class CoinbasePro
         $client = new Client(['headers' => $headers]);
 
         try {
-            $response = $client->request($method, self::BASE_URI.$uri,[]);
+            $response = $client->request($method, self::BASE_URI.$uri,$query);
             return json_decode((string) $response->getBody(), true);
         } catch (GuzzleException $e) {
             Log::error($e->getMessage());
@@ -91,6 +100,26 @@ class CoinbasePro
     public function getTime(array $query = [])
     {
         return $this->makeRequest('GET', '/time', $query);
+    }
+
+    public function getFills(array $query)
+    {
+        return $this->makeRequest('GET', '/fills', $query);
+    }
+
+    public function getPaymentMethods(array $query = [])
+    {
+        return $this->makeRequest('GET', '/payment-methods', $query);
+    }
+
+    public function getCoinbaseAccounts(array $query = [])
+    {
+        return $this->makeRequest('GET', '/coinbase-accounts', $query);
+    }
+
+    public function getFees(array $query = [])
+    {
+        return $this->makeRequest('GET', '/fees', $query);
     }
 
 }
